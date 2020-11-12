@@ -76,20 +76,15 @@ pigeon_data = {
 
 
 def nyc_pigeon_organizer(data)
-  result = data.each_with_object({}) do |(color_gender_lives, attributes), accumulator|
+  data.each_with_object({}) do |(color_gender_lives, attributes), result|
     attributes.each do |specs, names|
       names.each do |name|
-          if !accumulator[name] 
-            accumulator[name] = {}
-          end
-          if !accumulator[name][color_gender_lives]
-            accumulator[name][color_gender_lives] = []
-          end
-          accumulator[name][color_gender_lives].push(specs.to_s)
+        result[name] = {} if !result[name] 
+        result[name][color_gender_lives] = [] if !result[name][color_gender_lives]
+        result[name][color_gender_lives].push(specs.to_s)
       end
     end
   end
-  result
 end
 
 
